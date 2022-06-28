@@ -1,6 +1,6 @@
 - hosts: all
   become: yes
-  gether_facts: yes
+  gather_facts: yes
   tasks:
   - name: I want to install webserver
     apt:
