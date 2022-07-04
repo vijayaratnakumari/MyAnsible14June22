@@ -99,8 +99,8 @@ Save: Esc:wq!
 
 $ ansible-playbook -i myhosts mytree.yml 
 
-Add one more node for Amazon Linux EC2 Instance:
-------------------------------------------------
+IV. Add one more node for Amazon Linux EC2 Instance:
+-----------------------------------------------------
 
 $ ansible-playbook -i myhosts mysample.yml 
  next add one more instance node amazone linux EC2
