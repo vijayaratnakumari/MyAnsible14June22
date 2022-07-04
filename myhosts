@@ -1,2 +1,19 @@
+[mywebservers]
+
 172.31.3.92
 172.31.37.67
+
+[myappservers]
+172.31.0.81
+
+[myDBservers]
+
+172.31.3.2
+172.31.37.7
+
+[testgroup]
+server01 java8
+server02 java8
+server03 java8
+server04 java11
+server05 java8
