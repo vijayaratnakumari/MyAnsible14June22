@@ -1,0 +1,133 @@
+I. Install and configure Ansible master server:
+---------------------------------------------
+1. create AWS EC2 Instance 
+2. adduser ansible user with password 
+
+# adduser vijaya
+
+3. make ansible user as sudoer 
+
+# visudo 
+under the root type the  "vijaya ALL=(ALL) NOPASSWD:ALL"
+Save: ctrl+x ,press y, and press enter
+
+4. change passwd authentication yes (with passwd and without pem file)
+# vi /etc/ssh/sshd_config 
+password authentication yes
+Save: press esc :wq! 
+
+5. Restart ssh service 
+
+# service ssh restart 
+
+6. install ansible (open google browser search  for type "install ansible on ubuntu 18 04" )
+
+# sudo apt-add-repository ppa: ansible/ansible 
+# sudo apt update
+# sudo apt install ansible 
+# ansible --version 
+
+II. Configure ansible ode server:
+---------------------------------
+
+1. create AWS EC2 Instance 
+2. adduser ansible user with password 
+
+# adduser vijaya
+
+3. make ansible user as sudoer 
+
+# visudo 
+under the root type the  "vijaya ALL=(ALL) NOPASSWD:ALL"
+Save: ctrl+x ,press y, and press enter
+
+4. change passwd authentication yes (with passwd and without pem file)
+# vi /etc/ssh/sshd_config 
+password authentication yes
+Save: press esc :wq! 
+
+5. Restart ssh service 
+
+# service ssh restart 
+
+III. connet ansible master to ansible node on ansible master (EC2) as ansible user vijaya:
+------------------------------------------------------------------------------------------
+
+After successfully install ansible on master server then next follow the below steps. 
+# su vijaya 
+$ cd 
+$ pwd 
+$ ssh-keygen 
+$ ssh-copy-id <private id of ansible nodes>
+$ vi myhosts
+<Private of ansible nodes 1>
+<Private of ansible nodes 2>
+<Private of ansible nodes 3>
+<Private of ansible nodes n>
+
+Save: Esc :wq!
+
+$ ansible all -i myhosts -m ping
+success ansible 
+
+$ vi mysample.yml 
+  --- 
+  - key:value
+  space nofication 
+
+save: Esc:wq!
+
+ls 
+myhosts, mysample.yml 
+
+$ ansible-playbook -i myhosts mysample,yml 
+
+Ansible Ad-hoc commands:
+------------------------
+$ ansible all -i myhosts -b -m apt -a "name= tree" 
+ansible "all" is all nodes, "-i" is pikaping our own node "-m" is ping module.
+
+Ansible Ad-hoc = Admin commands:
+--------------------------------
+
+$ ansible all -i myhosts -b -m apt -a "name=tree" 
+Ad-hoc = admin
+
+$ vi mytree.yml 
+
+Save: Esc:wq! 
+
+$ ansible-playbook -i myhosts mytree.yml 
+
+Add one more node for Amazon Linux EC2 Instance:
+------------------------------------------------
+
+$ ansible-playbook -i myhosts mysample.yml 
+ next add one more instance node amazone linux EC2
+1. create EC2 instance Amazone linux 
+EC2----> connect -----> ssh key copy ----> paste in gitbash 
+open git bash paste ssh key
+$ sudo -i 
+# yum update
+# adduser vijaya 
+# passwd vijaya 
+# visudo 
+under root type "vijaya ALL:(ALL) NOPASSWD:ALL"
+save: Esc:wq!
+# service sshd restart 
+
+lets goto master terminal 
+
+$ $ ansible all -i myhosts -m ping
+
+$ ssh-copy-id <node 2 private ip>
+$ myhosts
+172.31.15.241
+172.31.5.145
+
+save: Esc:wq!
+
+$ ansible all -i myhosts -m ping
+$ ansible-playbook -i myhosts mysample.yml 
+$ ansible all -i myhosts -m setup 
+$ ansible all -i myhosts -m setup -a filter = "*family*"
